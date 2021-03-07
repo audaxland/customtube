@@ -34,6 +34,7 @@ class SearchQuery
     {
         $searchRequest = $this->getSearchRequest($queryString);
         return [
+            'searchQuery'   => $queryString,
             'totalResults'  => $searchRequest->total_results,
             'maxQuerable'   => min( $searchRequest->fetched_results + 50, $searchRequest->total_results),
             'page'          => $page,

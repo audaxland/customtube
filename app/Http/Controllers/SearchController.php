@@ -19,7 +19,7 @@ class SearchController extends Controller
             'itemsPerPage'  => 'integer',
         ]);
         $searchQuery = new SearchQuery();
-        return $searchQuery->searchFor(request('query'), request('page', 1), request('itemsPerPage', 10));
+        return $searchQuery->searchFor(strip_tags(request('query')), request('page', 1), request('itemsPerPage', 10));
     }
 
 }

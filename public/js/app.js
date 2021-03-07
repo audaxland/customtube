@@ -1975,7 +1975,9 @@ function ReactRoot() {
     setLoading(true);
     window.axios.get('/search', {
       params: {
-        query: query
+        query: query,
+        page: page,
+        itemsPerPage: itemsPerPage
       }
     }).then(function (res) {
       setResponse(res.data);
@@ -1985,10 +1987,21 @@ function ReactRoot() {
     });
   };
 
-  var _response$totalResult = response.totalResults,
+  var _response$searchQuery = response.searchQuery,
+      searchQuery = _response$searchQuery === void 0 ? '' : _response$searchQuery,
+      _response$page = response.page,
+      page = _response$page === void 0 ? 0 : _response$page,
+      _response$itemsPerPag = response.itemsPerPage,
+      itemsPerPage = _response$itemsPerPag === void 0 ? 10 : _response$itemsPerPag,
+      _response$totalResult = response.totalResults,
       totalResults = _response$totalResult === void 0 ? 0 : _response$totalResult,
       _response$videos = response.videos,
       videos = _response$videos === void 0 ? undefined : _response$videos;
+  /**
+   * boolean: flag to display or not the 'next page' link
+   */
+
+  var hasMoreVideos = page * itemsPerPage < totalResults;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
       children: "React Frontend"
@@ -2032,6 +2045,21 @@ function ReactRoot() {
             }, item['video_id']);
           })
         })]
+      }), hasMoreVideos && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        style: {
+          padding: '2em',
+          textAlign: 'center'
+        },
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+          onClick: function onClick(e) {
+            return sendRequest({
+              query: searchQuery,
+              page: parseInt(page) + 1,
+              itemsPerPage: itemsPerPage
+            });
+          },
+          children: "Next Page"
+        })
       })]
     })]
   });

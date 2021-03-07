@@ -18,7 +18,7 @@ function ReactRoot() {
 
     const sendRequest = ({ query, page = 1, itemsPerPage = 10 }) => {
         setLoading(true);
-        window.axios.get('/search', { params: { query } })
+        window.axios.get('/search', { params: { query, page, itemsPerPage } })
             .then(res => {
                 setResponse(res.data);
                 setLoading(false);
@@ -29,9 +29,17 @@ function ReactRoot() {
     };
 
     const {
+        searchQuery = '',
+        page = 0,
+        itemsPerPage = 10,
         totalResults = 0,
         videos = undefined,
     } = response;
+
+    /**
+     * boolean: flag to display or not the 'next page' link
+     */
+    const hasMoreVideos = (page * itemsPerPage) < totalResults;
 
     return (
         <div>
@@ -64,9 +72,20 @@ function ReactRoot() {
                         </div>
 
                     )}
+                    {hasMoreVideos && (
+                        <div style={{ padding: '2em', textAlign: 'center' }}>
+                            <button
+                                onClick={e => sendRequest({ query: searchQuery, page: parseInt(page) + 1, itemsPerPage })}
+                            >
+                                Next Page
+                            </button>
+                        </div>
+                    )}
                 </div>
-            )}
-        </div>
+
+            )
+            }
+        </div >
     );
 }
 
