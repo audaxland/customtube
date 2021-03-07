@@ -16,6 +16,8 @@ cd customtube
 ```bash
 cp .env.example .env
 ```
+Note: if you have a different setup you may have to update the .env file to fit your needs
+
 
 ### Run composer install and install sail
 
