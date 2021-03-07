@@ -22,4 +22,4 @@ Route::get('/', function () {
  * Handles a query to the youtube api using the google api library
  * @route GET /search-client
  */
-Route::get('/search', [SearchController::class, 'searchQuery']);
+Route::get('/search', [SearchController::class, 'searchYoutubeApi']);
