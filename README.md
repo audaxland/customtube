@@ -61,7 +61,28 @@ Then copy your api key in the .env file
 GOOGLE_API_KEY=XXXXXXXXXXXXXXX
 ```
 
+### Set up the client_secret.json file
 
+For OAuth querys you need to set up the OAuth keys, this is done on the google console 
+and it provides you with a client_secret.json file that you download
+
+go to: 
+<a href="https://developers.google.com/youtube/v3/getting-started" target="_blank">https://developers.google.com/youtube/v3/getting-started</a>
+
+
+Than file must be placed in a secure place on the server, and you need to indicate the path to that file in the .env file
+ using the setting
+
+```
+GOOGLE_CLIENT_SECRET_FILE
+```
+
+This path can be any of the following:
+
+- an absolute path
+- a relative path to the root of the app
+- a relative path to the storage directory of the app
+- a relative path to the storage/secret directory of the app
 
 ## View in browser
 

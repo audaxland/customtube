@@ -5,7 +5,7 @@ namespace App\YoutubeData\Exceptions;
 class YoutubeDataException extends \Exception
 {
     /**
-     * @var string Default exception message used if the excpetion instance war created without a message
+     * @var string Default exception message used if the excpetion instance was created without a message
      */
     protected $defaultMessage = 'Failed to call Youtube Api';
     
